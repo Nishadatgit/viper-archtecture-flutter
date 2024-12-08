@@ -1,21 +1,21 @@
 import 'package:equatable/equatable.dart';
 
-class NewsArticle extends Equatable {
+class ProductEntity extends Equatable {
   final String title;
   final String description;
   final String? imageUrl;
 
-  const NewsArticle({
+  const ProductEntity({
     required this.title,
     required this.description,
     this.imageUrl,
   });
 
-  factory NewsArticle.fromJson(Map<String, dynamic> json) {
-    return NewsArticle(
+  factory ProductEntity.fromJson(Map<String, dynamic> json) {
+    return ProductEntity(
       title: json['title'] ?? 'No Title',
       description: json['description'] ?? 'No Description',
-      imageUrl: json['image_url'],
+      imageUrl: json['image'],
     );
   }
 

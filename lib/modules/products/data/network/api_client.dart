@@ -1,32 +1,26 @@
 import 'package:dio/dio.dart';
-import '../../entity/news_article.dart';
 import '../exceptions/network_exceptions.dart';
 
-class NewsApiClient {
+class ProductsApiClient {
   final Dio dio;
   final String baseUrl;
   final String apiToken;
 
-  NewsApiClient({
+  ProductsApiClient({
     required this.dio,
-    this.baseUrl = 'https://api.thenewsapi.com/v1/news',
+    this.baseUrl = 'https://fakestoreapi.com',
     required this.apiToken,
   });
 
-  Future<List<NewsArticle>> fetchNews({int limit = 10}) async {
+  Future<List<dynamic>> fetchProducts() async {
     try {
       final response = await dio.get(
-        '$baseUrl/all',
-        queryParameters: {
-          'api_token': apiToken,
-          'language': 'en',
-          'limit': limit,
-        },
+        '$baseUrl/products',
+        queryParameters: {},
       );
 
       if (response.statusCode == 200) {
-        final data = response.data['data'] as List<dynamic>;
-        return data.map((e) => NewsArticle.fromJson(e)).toList();
+        return response.data;
       } else {
         throw NetworkException(
           message: 'Failed to fetch news',
